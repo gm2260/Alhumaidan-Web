@@ -1064,13 +1064,13 @@
       text-align: left;
     }
 
-    .auth-input.otp-input {
+    .auth-input.otp-input, .auth-input.pin-input {
       width: 100%;
       text-align: center;
-      letter-spacing: 8px;
+      letter-spacing: 12px;
       font-size: 1.8rem;
       font-weight: 700;
-      padding: 12px;
+      padding: 10px 14px;
       border: 1.5px solid #cbd5e1;
       border-radius: var(--radius-sm);
       background: #fff;
@@ -1079,7 +1079,7 @@
       direction: ltr;
     }
 
-    .auth-input.otp-input:focus {
+    .auth-input.otp-input:focus, .auth-input.pin-input:focus {
       outline: none;
       border-color: var(--border-focus);
       box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
@@ -1323,23 +1323,19 @@
   <!-- Toast Notification -->
   <div class="toast" id="toastMessage">تم نسخ تفاصيل الاشتراك بنجاح ✓</div>
 
-  <!-- Invisible Recaptcha Container for Firebase Phone Auth -->
-  <div id="recaptcha-container"></div>
-
-  <!-- Auth Modal (Phone & OTP) -->
+  <!-- Auth Modal (Phone & PIN) -->
   <div class="auth-modal-backdrop" id="authModal" aria-hidden="true">
     <div class="auth-modal-card">
       <button type="button" class="modal-close-btn" id="closeAuthModalBtn" aria-label="إغلاق">&times;</button>
       
-      <!-- Step 1: Phone Input -->
-      <div id="authStepPhone">
+      <div>
         <div class="modal-icon-badge">
           <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-            <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
           </svg>
         </div>
         <h3 class="modal-title">تسجيل دخول رب الأسرة</h3>
-        <p class="modal-desc">أدخل رقم جوالك لجلب بيانات واشتراكات أسرتك المحفوظة، أو لحفظ بياناتك الجديدة في السحابة.</p>
+        <p class="modal-desc">أدخل رقم جوالك والرمز السري لجلب بيانات واشتراكات أسرتك المحفوظة، أو لحفظ بياناتك في السحابة.</p>
 
         <div class="auth-form-group">
           <label for="phoneNumberInput" class="auth-label">رقم الجوال:</label>
@@ -1350,53 +1346,29 @@
           <span class="auth-hint">يمكنك إدخال الرقم بصيغة 05xxxxxxxx أو 5xxxxxxxx</span>
         </div>
 
-        <div style="margin: 0 0 14px; padding: 8px 12px; background: #f0f7f3; border: 1px solid #d4e5da; border-radius: 8px; font-size: 0.82rem; color: #1b4332; text-align: right; line-height: 1.5;">
-          💡 <b>للتجربة السريعة والمجانية:</b> يمكنك استخدام الرقم التجريبي <b>0500000000</b> والكود <b>123456</b>، أو إدخال رقمك الفعلي.
-        </div>
-
-        <div class="auth-error-msg" id="phoneErrorMsg"></div>
-
-        <button type="button" class="btn btn-auth-action" id="sendOtpBtn">
-          <span class="btn-spinner" id="phoneSpinner"></span>
-          <span class="btn-text" id="sendOtpBtnText">إرسال رمز التحقق (OTP)</span>
-        </button>
-      </div>
-
-      <!-- Step 2: OTP Verification -->
-      <div id="authStepOtp" style="display: none;">
-        <div class="modal-icon-badge">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
-            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-          </svg>
-        </div>
-        <h3 class="modal-title">تأكيد رمز التحقق (OTP)</h3>
-        <p class="modal-desc">تم إرسال كود التحقق في رسالة SMS إلى: <br><b id="displaySentPhone" dir="ltr" style="font-size: 1.05rem; color: var(--primary);"></b></p>
-
         <div class="auth-form-group">
-          <label for="otpCodeInput" class="auth-label">رمز التحقق (6 أرقام):</label>
-          <input type="text" id="otpCodeInput" class="auth-input otp-input" placeholder="● ● ● ● ● ●" maxlength="6" inputmode="numeric" autocomplete="one-time-code" dir="ltr">
+          <label for="pinCodeInput" class="auth-label">الرمز السري الخاص بك (4 أرقام):</label>
+          <input type="password" id="pinCodeInput" class="auth-input pin-input" placeholder="● ● ● ●" maxlength="4" inputmode="numeric" autocomplete="current-password" dir="ltr">
+          <span class="auth-hint">💡 إذا كانت أول زيارة: اختر أي 4 أرقام لتكون رمزك الدائم. إذا كنت مسجلاً مسبقاً: أدخل رمزك السابق.</span>
         </div>
 
-        <div class="auth-error-msg" id="otpErrorMsg"></div>
+        <div class="auth-error-msg" id="authErrorMsg"></div>
 
-        <button type="button" class="btn btn-auth-action" id="verifyOtpBtn">
-          <span class="btn-spinner" id="otpSpinner"></span>
-          <span class="btn-text" id="verifyOtpBtnText">تأكيد الرمز والدخول</span>
+        <button type="button" class="btn btn-auth-action" id="loginSubmitBtn">
+          <span class="btn-spinner" id="authSpinner"></span>
+          <span class="btn-text" id="loginSubmitBtnText">تسجيل الدخول / استرجاع البيانات ☁️</span>
         </button>
 
-        <div class="modal-secondary-actions">
-          <button type="button" class="btn-text-link" id="resendOtpBtn">إعادة إرسال الرمز</button>
-          <span>•</span>
-          <button type="button" class="btn-text-link" id="backToPhoneBtn">تغيير رقم الجوال</button>
+        <div style="margin-top: 14px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">
+          🔒 بيانات كل رب أسرة تُحفظ في السحابة وتكون خاصة برقم جواله ورمزه السري.
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- Firebase SDKs (Compat version for reliable browser/file support) -->
+  <!-- Firebase SDKs (Realtime Database & App) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
   <script>
@@ -1415,20 +1387,15 @@
     };
 
     let app = null;
-    let auth = null;
     let rtdb = null;
-    let currentUser = null;
-    let confirmationResult = null;
-    let recaptchaVerifier = null;
+    let currentUser = null; // { phone, phoneKey, pin, name }
     let cloudSaveTimer = null;
+    const USER_SESSION_KEY = 'humaidan_active_user_v1';
 
     try {
       if (typeof firebase !== 'undefined') {
         app = firebase.initializeApp(firebaseConfig);
-        auth = firebase.auth();
         rtdb = firebase.database();
-        // Set language to Arabic for SMS verification messages
-        auth.languageCode = 'ar';
       }
     } catch (e) {
       console.warn("Firebase initialization notice:", e);
@@ -1567,15 +1534,13 @@
       textEl.textContent = text;
     }
 
-    function loadUserDataFromCloud(user) {
-      if (!rtdb || !user) return;
-      const phoneKey = getCleanPhoneKey(user.phoneNumber);
-      if (!phoneKey) return;
+    async function loadUserDataFromCloud(phoneKey, pin) {
+      if (!rtdb || !phoneKey) return;
 
       updateCloudStatus('syncing', 'جاري جلب بيانات أسرتك من السحابة...');
 
-      const familyRef = rtdb.ref('families/' + phoneKey);
-      familyRef.once('value').then(snapshot => {
+      try {
+        const snapshot = await rtdb.ref('families/' + phoneKey).once('value');
         const data = snapshot.val();
         if (data) {
           state.name = data.name || '';
@@ -1592,35 +1557,31 @@
           renderCategories();
           updateSummary();
           showToast(`مرحباً بك ${state.name ? '«' + state.name + '»' : ''}! تم استرجاع بيانات أسرتك بنجاح ☁️`);
-          updateCloudStatus('online', `متصل بالسحابة • ${state.name || user.phoneNumber}`);
+          updateCloudStatus('online', `متصل بالسحابة • ${state.name || data.phoneNumber || phoneKey}`);
         } else {
-          // New family head with this phone number: start clean
           resetLocalStateToEmpty();
-          showToast('أهلاً بك! يمكنك الآن تسجيل أفراد أسرتك وسيتم حفظها برقم جوالك مباشرة ☁️');
-          updateCloudStatus('online', `متصل بالسحابة • ${user.phoneNumber}`);
+          showToast('أهلاً بك! يمكنك الآن تسجيل أفراد أسرتك وستُحفظ في السحابة مباشرة ☁️');
+          updateCloudStatus('online', `متصل بالسحابة • ${phoneKey}`);
         }
-      }).catch(err => {
+      } catch (err) {
         console.error('Error fetching family cloud data:', err);
         updateCloudStatus('online', 'متصل بالسحابة');
-      });
+      }
     }
 
-    function saveUserDataToCloud(showNotification = true) {
-      if (!auth || !rtdb) {
+    async function saveUserDataToCloud(showNotification = true) {
+      if (!rtdb) {
         if (showNotification) showToast('الفايربيس غير متوفر حالياً');
-        return Promise.resolve(false);
+        return false;
       }
 
-      if (!currentUser) {
+      if (!currentUser || !currentUser.phoneKey) {
         if (showNotification) {
           openAuthModal();
           showToast('يرجى تسجيل الدخول أولاً لحفظ البيانات في السحابة');
         }
-        return Promise.resolve(false);
+        return false;
       }
-
-      const phoneKey = getCleanPhoneKey(currentUser.phoneNumber);
-      if (!phoneKey) return Promise.resolve(false);
 
       updateCloudStatus('syncing', 'جاري الحفظ في السحابة...');
       const saveBtn = document.getElementById('cloudSaveBtn');
@@ -1635,9 +1596,9 @@
       });
 
       const payload = {
-        phoneNumber: currentUser.phoneNumber || '',
-        phoneKey: phoneKey,
-        userId: currentUser.uid,
+        phoneNumber: currentUser.phone || '',
+        phoneKey: currentUser.phoneKey,
+        pin: currentUser.pin || '',
         name: (state.name || '').trim(),
         counts: state.counts,
         totalAmount: totalAmount,
@@ -1645,26 +1606,24 @@
         lastUpdated: new Date().toISOString()
       };
 
-      const p1 = rtdb.ref('families/' + phoneKey).set(payload);
-      const p2 = rtdb.ref('subscriptions/' + currentUser.uid).set(payload);
-
-      return Promise.all([p1, p2]).then(() => {
+      try {
+        await rtdb.ref('families/' + currentUser.phoneKey).set(payload);
         const timeStr = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
         updateCloudStatus('online', `تم الحفظ في السحابة (${timeStr}) ✓`);
         if (showNotification) {
           showToast('تم حفظ وتأكيد بيانات أسرتك في السحابة بنجاح ✓ ☁️');
         }
         return true;
-      }).catch(err => {
+      } catch (err) {
         console.error('Save to cloud failed:', err);
         updateCloudStatus('online', 'تعذر الحفظ في السحابة');
         if (showNotification) {
           showToast('تعذر الحفظ في السحابة: ' + (err.message || ''));
         }
         return false;
-      }).finally(() => {
+      } finally {
         if (saveBtn) saveBtn.disabled = false;
-      });
+      }
     }
 
     function scheduleAutoCloudSave() {
@@ -1677,7 +1636,7 @@
     }
 
     // ---------------------------------------------------------
-    // 5. Phone Authentication & OTP Functions
+    // 5. Phone & PIN Authentication Functions
     // ---------------------------------------------------------
     function normalizeArabicNumerals(str) {
       if (!str) return '';
@@ -1703,86 +1662,24 @@
       return cleaned;
     }
 
-    function getArabicAuthErrorMessage(error) {
-      if (!error) return 'حدث خطأ غير متوقع';
-      const code = error.code || '';
-      const msg = error.message || '';
-      
-      if (code === 'auth/api-key-not-valid' || msg.includes('api-key-not-valid')) {
-        return 'يرجى الضغط على مفتاحي Ctrl + F5 معاً لإعادة تحميل الصفحة وتحديث مفتاح المشروع.';
-      }
-      if (code === 'auth/operation-not-allowed' || msg.includes('SMS unable to be sent') || msg.includes('OPERATION_NOT_ALLOWED')) {
-        return 'خدمة الـ SMS تتطلب تفعيل منطقة السعودية (+966) في إعدادات Firebase، أو استخدام الرقم التجريبي 0500000000 مع رمز 123456.';
-      }
-
-      switch (code) {
-        case 'auth/invalid-phone-number':
-          return 'رقم الجوال غير صحيح. تأكد من إدخال 9 إلى 10 أرقام (مثال: 0501234567).';
-        case 'auth/missing-phone-number':
-          return 'يرجى إدخال رقم الجوال.';
-        case 'auth/quota-exceeded':
-          return 'تم استهلاك حد الرسائل اليومي المجاني (10 رسائل). استخدم الرقم التجريبي 0500000000 والكود 123456.';
-        case 'auth/too-many-requests':
-          return 'تم إيقاف الطلبات مؤقتاً لكثرة المحاولات. انتظر دقيقة ثم حاول ثانية.';
-        case 'auth/invalid-verification-code':
-          return 'رمز التحقق (OTP) غير صحيح، يرجى التأكد من الـ 6 أرقام وإعادة المحاولة.';
-        case 'auth/code-expired':
-          return 'انتهت صلاحية رمز التحقق، يرجى الضغط على "إعادة إرسال الرمز".';
-        case 'auth/network-request-failed':
-          return 'تعذر الاتصال بخوادم التحقق، تأكد من اتصالك بالإنترنت.';
-        case 'auth/app-not-authorized':
-          return 'هذا النطاق غير مصرح به في Firebase Console. شغّل الموقع عبر http://localhost:8000';
-        case 'auth/captcha-check-failed':
-          return 'فشل التحقق الأمني reCAPTCHA، أعد المحاولة.';
-        default:
-          return msg || 'حدث خطأ أثناء المصادقة، يرجى المحاولة لاحقاً.';
-      }
-    }
-
-    function resetRecaptcha() {
-      if (recaptchaVerifier) {
-        try {
-          recaptchaVerifier.clear();
-        } catch(e) {}
-        recaptchaVerifier = null;
-      }
-      const container = document.getElementById('recaptcha-container');
-      if (container) {
-        container.innerHTML = '';
-      }
-    }
-
-    function initRecaptchaVerifier() {
-      resetRecaptcha();
-      recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-        'size': 'invisible',
-        'callback': (response) => {
-          // reCAPTCHA solved
-        },
-        'expired-callback': () => {
-          document.getElementById('phoneErrorMsg').textContent = 'انتهت صلاحية التحقق، يرجى المحاولة مجدداً.';
-          resetRecaptcha();
-        }
-      });
-    }
-
     function openAuthModal() {
       const modal = document.getElementById('authModal');
-      document.getElementById('authStepPhone').style.display = 'block';
-      document.getElementById('authStepOtp').style.display = 'none';
-      document.getElementById('phoneErrorMsg').textContent = '';
-      document.getElementById('otpErrorMsg').textContent = '';
+      document.getElementById('authErrorMsg').textContent = '';
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
       setTimeout(() => {
-        const input = document.getElementById('phoneNumberInput');
-        if (input) input.focus();
-      }, 100);
+        const phoneInput = document.getElementById('phoneNumberInput');
+        if (phoneInput && !phoneInput.value) {
+          phoneInput.focus();
+        } else {
+          document.getElementById('pinCodeInput')?.focus();
+        }
+      }, 120);
     }
 
     function closeAuthModal() {
       if (!currentUser) {
-        showToast('يرجى تسجيل الدخول برقم الجوال أولاً للوصول لحساب أسرتك.');
+        showToast('يرجى تسجيل الدخول برقم الجوال والرمز السري أولاً للوصول لحساب أسرتك.');
         return;
       }
       const modal = document.getElementById('authModal');
@@ -1790,173 +1687,155 @@
       modal.setAttribute('aria-hidden', 'true');
     }
 
-    let isDevSimulatedMode = false;
-    let pendingDevPhone = '';
-
-    async function handleSendOtp() {
+    async function handleLogin() {
       const phoneInput = document.getElementById('phoneNumberInput');
-      const errorEl = document.getElementById('phoneErrorMsg');
-      const spinner = document.getElementById('phoneSpinner');
-      const btnText = document.getElementById('sendOtpBtnText');
-      const btn = document.getElementById('sendOtpBtn');
+      const pinInput = document.getElementById('pinCodeInput');
+      const errorEl = document.getElementById('authErrorMsg');
+      const spinner = document.getElementById('authSpinner');
+      const btnText = document.getElementById('loginSubmitBtnText');
+      const btn = document.getElementById('loginSubmitBtn');
 
       errorEl.textContent = '';
-      const raw = phoneInput.value.trim();
-      if (!raw) {
-        errorEl.textContent = 'يرجى إدخال رقم الجوال أولاً';
+      const rawPhone = (phoneInput.value || '').trim();
+      const rawPin = (pinInput.value || '').trim();
+
+      if (!rawPhone) {
+        errorEl.textContent = 'يرجى إدخال رقم الجوال أولاً.';
+        phoneInput.focus();
         return;
       }
 
-      const formatted = formatSaudiPhoneNumber(raw);
-      if (!formatted || formatted.length < 10) {
-        errorEl.textContent = 'رقم الجوال غير صحيح. اكتبه بصيغة 05xxxxxxxx';
+      const formattedPhone = formatSaudiPhoneNumber(rawPhone);
+      const phoneKey = getCleanPhoneKey(rawPhone);
+
+      if (!phoneKey || phoneKey.length < 11 || !formattedPhone.startsWith('+9665')) {
+        errorEl.textContent = 'رقم الجوال غير صحيح. يرجى إدخال رقم سعودي يبدأ بـ 05 (مثال: 0501234567).';
+        phoneInput.focus();
         return;
       }
 
-      if (!auth) {
-        errorEl.textContent = 'خدمة التحقق غير مهيأة بعد.';
+      const pin = normalizeArabicNumerals(rawPin).replace(/\D/g, '');
+      if (!pin || pin.length !== 4) {
+        errorEl.textContent = 'يرجى إدخال الرمز السري المكون من 4 أرقام (PIN).';
+        pinInput.focus();
         return;
       }
 
       btn.disabled = true;
       spinner.style.display = 'inline-block';
-      btnText.textContent = 'جاري إرسال الرمز...';
-
-      // If user typed the test number: provide immediate smooth flow with fallback
-      if (formatted === '+966500000000') {
-        try {
-          initRecaptchaVerifier();
-          confirmationResult = await auth.signInWithPhoneNumber(formatted, recaptchaVerifier);
-          isDevSimulatedMode = false;
-        } catch (err) {
-          console.warn('Test number fallback to instant dev mode:', err);
-          isDevSimulatedMode = true;
-          pendingDevPhone = formatted;
-        }
-
-        document.getElementById('displaySentPhone').textContent = formatted;
-        document.getElementById('authStepPhone').style.display = 'none';
-        document.getElementById('authStepOtp').style.display = 'block';
-        document.getElementById('otpCodeInput').value = '';
-        setTimeout(() => {
-          document.getElementById('otpCodeInput').focus();
-        }, 150);
-        showToast('تم تجهيز رمز التحقق التجريبي (123456) 📨');
-        btn.disabled = false;
-        spinner.style.display = 'none';
-        btnText.textContent = 'إرسال رمز التحقق (OTP)';
-        return;
-      }
+      btnText.textContent = 'جاري التحقق والمزامنة...';
 
       try {
-        initRecaptchaVerifier();
-        confirmationResult = await auth.signInWithPhoneNumber(formatted, recaptchaVerifier);
-        isDevSimulatedMode = false;
-        
-        // Show OTP step
-        document.getElementById('displaySentPhone').textContent = formatted;
-        document.getElementById('authStepPhone').style.display = 'none';
-        document.getElementById('authStepOtp').style.display = 'block';
-        document.getElementById('otpCodeInput').value = '';
-        setTimeout(() => {
-          document.getElementById('otpCodeInput').focus();
-        }, 150);
-        showToast('تم إرسال رمز التحقق في رسالة نصية 📨');
-      } catch (err) {
-        console.error('Send OTP Error:', err);
-        errorEl.textContent = getArabicAuthErrorMessage(err);
-        resetRecaptcha();
-      } finally {
-        btn.disabled = false;
-        spinner.style.display = 'none';
-        btnText.textContent = 'إرسال رمز التحقق (OTP)';
-      }
-    }
+        if (!rtdb) {
+          throw new Error('الفايربيس غير متصل، يرجى التأكد من اتصال الإنترنت.');
+        }
 
-    async function handleVerifyOtp() {
-      const otpInput = document.getElementById('otpCodeInput');
-      const errorEl = document.getElementById('otpErrorMsg');
-      const spinner = document.getElementById('otpSpinner');
-      const btnText = document.getElementById('verifyOtpBtnText');
-      const btn = document.getElementById('verifyOtpBtn');
+        const snapshot = await rtdb.ref('families/' + phoneKey).once('value');
+        const existingData = snapshot.val();
 
-      errorEl.textContent = '';
-      const otp = normalizeArabicNumerals(otpInput.value).replace(/\D/g, '');
+        if (existingData) {
+          // Existing family account
+          if (existingData.pin && existingData.pin !== pin) {
+            errorEl.textContent = 'الرمز السري غير صحيح لهذا الرقم. يرجى التأكد من الـ 4 أرقام.';
+            pinInput.focus();
+            return;
+          }
 
-      if (!otp || otp.length !== 6) {
-        errorEl.textContent = 'يرجى إدخال الرمز المكون من 6 أرقام بالكامل';
-        return;
-      }
+          // PIN matches or previous entry had no PIN
+          if (!existingData.pin) {
+            // Set PIN for existing account
+            await rtdb.ref('families/' + phoneKey + '/pin').set(pin);
+          }
 
-      if (isDevSimulatedMode) {
-        if (otp === '123456') {
-          btn.disabled = true;
-          spinner.style.display = 'inline-block';
-          btnText.textContent = 'جاري تسجيل الدخول...';
-          
           currentUser = {
-            uid: 'dev_user_500000000',
-            phoneNumber: pendingDevPhone || '+966500000000'
+            phone: existingData.phoneNumber || formattedPhone,
+            phoneKey: phoneKey,
+            pin: pin,
+            name: existingData.name || ''
           };
+
+          state.name = existingData.name || '';
+          const nameInput = document.getElementById('familyHeadName');
+          if (nameInput) nameInput.value = state.name;
+
+          categories.forEach(cat => {
+            state.counts[cat.id] = (existingData.counts && existingData.counts[cat.id] !== undefined)
+              ? parseInt(existingData.counts[cat.id], 10)
+              : 0;
+          });
+
+          localStorage.setItem(USER_SESSION_KEY, JSON.stringify(currentUser));
+          saveState();
+          renderCategories();
+          updateSummary();
           updateAuthUI(currentUser);
-          updateCloudStatus('online', `متصل بالسحابة (${currentUser.phoneNumber})`);
-          loadUserDataFromCloud(currentUser);
-          
+          updateCloudStatus('online', `متصل بالسحابة • ${state.name || currentUser.phone}`);
+
           const modal = document.getElementById('authModal');
           if (modal) {
             modal.classList.remove('active');
             modal.setAttribute('aria-hidden', 'true');
           }
-          showToast('أهلاً بك! تم تسجيل الدخول التجريبي بنجاح ✓');
-          btn.disabled = false;
-          spinner.style.display = 'none';
-          btnText.textContent = 'تأكيد الرمز والدخول';
-          return;
+          showToast(`أهلاً بك ${state.name ? '«' + state.name + '»' : ''}! تم استرجاع بيانات أسرتك بنجاح ☁️`);
+
         } else {
-          errorEl.textContent = 'رمز التحقق التجريبي هو: 123456';
-          return;
+          // New family account
+          const newFamilyData = {
+            phoneNumber: formattedPhone,
+            phoneKey: phoneKey,
+            pin: pin,
+            name: (state.name || '').trim(),
+            counts: state.counts,
+            totalAmount: 0,
+            totalPersons: 0,
+            createdAt: new Date().toISOString(),
+            lastUpdated: new Date().toISOString()
+          };
+
+          await rtdb.ref('families/' + phoneKey).set(newFamilyData);
+
+          currentUser = {
+            phone: formattedPhone,
+            phoneKey: phoneKey,
+            pin: pin,
+            name: state.name || ''
+          };
+
+          localStorage.setItem(USER_SESSION_KEY, JSON.stringify(currentUser));
+          saveState();
+          updateAuthUI(currentUser);
+          updateCloudStatus('online', `متصل بالسحابة • ${currentUser.phone}`);
+
+          const modal = document.getElementById('authModal');
+          if (modal) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+          }
+          showToast(`أهلاً بك! تم إنشاء حساب أسرتك بالرمز (${pin}). حدد أفراد أسرتك وستُحفظ في السحابة تلقائياً ☁️`);
         }
-      }
-
-      if (!confirmationResult) {
-        errorEl.textContent = 'انتهت صلاحية الجلسة، اضغط إعادة إرسال الرمز';
-        return;
-      }
-
-      btn.disabled = true;
-      spinner.style.display = 'inline-block';
-      btnText.textContent = 'جاري التحقق...';
-
-      try {
-        const result = await confirmationResult.confirm(otp);
-        currentUser = result.user;
-        const modal = document.getElementById('authModal');
-        if (modal) {
-          modal.classList.remove('active');
-          modal.setAttribute('aria-hidden', 'true');
-        }
-        showToast('أهلاً بك! تم تسجيل الدخول بنجاح ✓');
       } catch (err) {
-        console.error('Verify OTP Error:', err);
-        errorEl.textContent = getArabicAuthErrorMessage(err);
+        console.error('Login error:', err);
+        errorEl.textContent = 'تعذر الاتصال بالسحابة: ' + (err.message || 'يرجى المحاولة ثانية');
       } finally {
         btn.disabled = false;
         spinner.style.display = 'none';
-        btnText.textContent = 'تأكيد الرمز والدخول';
+        btnText.textContent = 'تسجيل الدخول / استرجاع البيانات ☁️';
       }
     }
 
     function handleLogout() {
-      if (!auth) return;
-      if (confirm('هل تريد تسجيل الخروج؟ سيتم إغلاق بيانات أسرتك الحالية لإتاحة الدخول لرب أسرة آخر.')) {
-        auth.signOut().then(() => {
-          currentUser = null;
-          resetLocalStateToEmpty();
-          showToast('تم تسجيل الخروج بنجاح');
-          openAuthModal();
-        }).catch(err => {
-          console.error('Logout error:', err);
-        });
+      if (confirm('هل تريد تسجيل الخروج؟ سيتم مسح بيانات الشاشة لإتاحة الدخول لرب أسرة آخر.')) {
+        currentUser = null;
+        localStorage.removeItem(USER_SESSION_KEY);
+        resetLocalStateToEmpty();
+        updateAuthUI(null);
+        updateCloudStatus('offline', 'يرجى تسجيل الدخول للوصول لبيانات أسرتك');
+        const phoneInput = document.getElementById('phoneNumberInput');
+        const pinInput = document.getElementById('pinCodeInput');
+        if (phoneInput) phoneInput.value = '';
+        if (pinInput) pinInput.value = '';
+        showToast('تم تسجيل الخروج بنجاح');
+        openAuthModal();
       }
     }
 
@@ -1965,14 +1844,14 @@
       if (!container) return;
 
       if (user) {
-        const displayPhone = user.phoneNumber || 'مستخدم مسجل';
+        const displayPhone = user.phone || 'مستخدم مسجل';
         container.innerHTML = `
           <div class="user-chip">
             <span class="user-phone">📱 ${displayPhone}</span>
             <button type="button" class="btn-logout" id="logoutBtn" title="تسجيل الخروج لرب أسرة آخر">تبديل / خروج</button>
           </div>
         `;
-        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+        document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
       } else {
         container.innerHTML = `
           <button type="button" class="btn-auth-login" id="openLoginModalBtn">
@@ -1982,33 +1861,8 @@
             <span>تسجيل الدخول بالجوال</span>
           </button>
         `;
-        document.getElementById('openLoginModalBtn').addEventListener('click', openAuthModal);
+        document.getElementById('openLoginModalBtn')?.addEventListener('click', openAuthModal);
       }
-    }
-
-    // Auth state observer: Checks login on entry and automatically opens modal if not logged in
-    if (auth) {
-      auth.onAuthStateChanged(user => {
-        currentUser = user;
-        updateAuthUI(user);
-        if (user) {
-          updateCloudStatus('online', `متصل بالسحابة (${user.phoneNumber || 'مسجل'})`);
-          loadUserDataFromCloud(user);
-          const modal = document.getElementById('authModal');
-          if (modal) {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-          }
-        } else {
-          resetLocalStateToEmpty();
-          updateCloudStatus('offline', 'يرجى تسجيل الدخول للوصول لبيانات أسرتك');
-          openAuthModal();
-        }
-      });
-    } else {
-      setTimeout(() => {
-        if (!currentUser) openAuthModal();
-      }, 500);
     }
 
     // ---------------------------------------------------------
@@ -2139,8 +1993,8 @@
       if (state.name.trim()) {
         lines.push(`👤 *المشترك:* ${state.name.trim()}`);
       }
-      if (currentUser && currentUser.phoneNumber) {
-        lines.push(`📱 *رقم الجوال:* ${currentUser.phoneNumber}`);
+      if (currentUser && (currentUser.phone || currentUser.phoneNumber)) {
+        lines.push(`📱 *رقم الجوال:* ${currentUser.phone || currentUser.phoneNumber}`);
         lines.push(`☁️ *الحالة:* موثق ومسجل بالسحابة ✓`);
       }
 
@@ -2241,39 +2095,70 @@
 
     // Auth Modal Handlers
     document.getElementById('openLoginModalBtn')?.addEventListener('click', openAuthModal);
-    document.getElementById('closeAuthModalBtn').addEventListener('click', closeAuthModal);
-    document.getElementById('authModal').addEventListener('click', (e) => {
+    document.getElementById('closeAuthModalBtn')?.addEventListener('click', closeAuthModal);
+    document.getElementById('authModal')?.addEventListener('click', (e) => {
       if (e.target.id === 'authModal') closeAuthModal();
     });
 
-    document.getElementById('sendOtpBtn').addEventListener('click', handleSendOtp);
-    document.getElementById('phoneNumberInput').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleSendOtp();
-    });
-
-    document.getElementById('verifyOtpBtn').addEventListener('click', handleVerifyOtp);
-    document.getElementById('otpCodeInput').addEventListener('input', (e) => {
-      const val = normalizeArabicNumerals(e.target.value).replace(/\D/g, '');
-      if (val.length === 6) {
-        handleVerifyOtp();
+    document.getElementById('loginSubmitBtn')?.addEventListener('click', handleLogin);
+    
+    document.getElementById('phoneNumberInput')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const pinInput = document.getElementById('pinCodeInput');
+        if (pinInput && pinInput.value.length === 4) {
+          handleLogin();
+        } else {
+          pinInput?.focus();
+        }
       }
     });
-    document.getElementById('otpCodeInput').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleVerifyOtp();
+
+    document.getElementById('pinCodeInput')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        handleLogin();
+      }
     });
 
-    document.getElementById('resendOtpBtn').addEventListener('click', handleSendOtp);
-    document.getElementById('backToPhoneBtn').addEventListener('click', () => {
-      document.getElementById('authStepOtp').style.display = 'none';
-      document.getElementById('authStepPhone').style.display = 'block';
-      document.getElementById('otpErrorMsg').textContent = '';
-      document.getElementById('phoneNumberInput').focus();
+    document.getElementById('pinCodeInput')?.addEventListener('input', (e) => {
+      const val = normalizeArabicNumerals(e.target.value).replace(/\D/g, '');
+      e.target.value = val;
+      if (val.length === 4) {
+        const phone = (document.getElementById('phoneNumberInput')?.value || '').trim();
+        if (phone.length >= 9) {
+          handleLogin();
+        }
+      }
     });
 
     // Initialize application
-    loadState();
-    renderCategories();
-    updateSummary();
+    function initApp() {
+      loadState();
+      renderCategories();
+      updateSummary();
+
+      // Check active user session
+      try {
+        const savedSession = localStorage.getItem(USER_SESSION_KEY);
+        if (savedSession) {
+          const user = JSON.parse(savedSession);
+          if (user && user.phoneKey) {
+            currentUser = user;
+            updateAuthUI(currentUser);
+            loadUserDataFromCloud(user.phoneKey, user.pin);
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('Session parse error:', e);
+      }
+
+      // No active user session: prompt login modal on initial entry
+      setTimeout(() => {
+        openAuthModal();
+      }, 400);
+    }
+
+    initApp();
   </script>
 </body>
 </html>

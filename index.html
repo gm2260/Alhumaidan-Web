@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إجتماع أسرة عائلة الحميدان</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #1b4332;
+      --primary-dark: #143527;
+      --primary-light: #2d6a4f;
+      --primary-surface: #f0f7f3;
+      --gold: #b38b4d;
+      --gold-light: #f7f3ec;
+      --gold-dark: #916e37;
+      --sand-bg: #f9f8f5;
+      --card-bg: #ffffff;
+      --text-main: #1f2937;
+      --text-secondary: #5a6578;
+      --text-muted: #8c97a8;
+      --border-color: #e5e9ea;
+      --border-focus: #2d6a4f;
+      --shadow-sm: 0 2px 8px rgba(27, 67, 50, 0.04);
+      --shadow-md: 0 6px 20px rgba(27, 67, 50, 0.06);
+      --shadow-lg: 0 12px 35px rgba(27, 67, 50, 0.08);
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-family: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--sand-bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(27, 67, 50, 0.02) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(179, 139, 77, 0.03) 0%, transparent 30%);
+      padding: 24px 16px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* Header styling */
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-light);
+      color: var(--gold-dark);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 1px solid rgba(179, 139, 77, 0.25);
+      margin-bottom: 14px;
+    }
+
+    .header-badge svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .header h1 {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+
+    /* Event Details Card - Redesigned & Polished */
+    .event-card {
+      background: var(--card-bg);
+      border: 1px solid #e2eae4;
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      margin: 0 auto 18px;
+      max-width: 720px;
+      box-shadow: 0 4px 20px rgba(27, 67, 50, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Date Row */
+    .event-date-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      text-align: center;
+      padding: 2px 4px;
+    }
+
+    .event-date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .event-date-badge svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .event-blessing-pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--gold-light);
+      color: var(--gold-dark);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 50px;
+      border: 1px solid rgba(179, 139, 77, 0.25);
+      white-space: nowrap;
+    }
+
+    /* Location Box (Red Circle Area) */
+    .event-location-box {
+      background: linear-gradient(135deg, #f4f8f5 0%, #edf6f0 100%);
+      border: 1px solid #d4e5da;
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 2px 6px rgba(27, 67, 50, 0.03);
+    }
+
+    .venue-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .venue-icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(27, 67, 50, 0.08);
+      flex-shrink: 0;
+    }
+
+    .venue-icon-circle svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .venue-text-group {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+
+    .venue-label {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .venue-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      line-height: 1.3;
+    }
+
+    .event-map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 3px 10px rgba(27, 67, 50, 0.18);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .event-map-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+      box-shadow: 0 5px 14px rgba(27, 67, 50, 0.25);
+      color: #ffffff;
+    }
+
+    .event-map-btn svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .event-map-btn .map-arrow {
+      font-size: 0.95rem;
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .event-map-btn:hover .map-arrow {
+      transform: translate(-2px, -2px);
+    }
+
+    @media (max-width: 440px) {
+      .event-card {
+        padding: 12px 14px;
+      }
+      .event-location-box {
+        padding: 10px 12px;
+      }
+      .venue-title {
+        font-size: 0.98rem;
+      }
+      .event-map-btn {
+        padding: 7px 12px;
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (max-width: 350px) {
+      .event-location-box {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 10px;
+      }
+      .venue-info {
+        justify-content: center;
+      }
+      .event-map-btn {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
+    .greeting-card {
+      background: var(--card-bg);
+      border-right: 4px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin: 0 auto 30px;
+      max-width: 760px;
+      text-align: right;
+      box-shadow: var(--shadow-sm);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      border-left: 1px solid var(--border-color);
+    }
+
+    .greeting-card p {
+      font-size: 1rem;
+      color: #334155;
+      font-weight: 500;
+    }
+
+    .greeting-card .sub-note {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    /* Main Grid Layout */
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .calc-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards column */
+    .categories-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .category-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 520px) {
+      .category-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 14px 16px;
+      }
+      .counter-group {
+        justify-content: flex-end;
+      }
+      .header h1 {
+        font-size: 1.65rem;
+      }
+    }
+
+    .category-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-card.has-value {
+      border-color: rgba(27, 67, 50, 0.35);
+      background-color: #ffffff;
+      box-shadow: 0 4px 16px rgba(27, 67, 50, 0.05);
+    }
+
+    .category-info {
+      flex: 1;
+    }
+
+    .category-title {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .category-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .rate-tag {
+      display: inline-block;
+      background: var(--primary-surface);
+      color: var(--primary);
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .counter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .counter-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      background: #f8fafc;
+      color: var(--text-main);
+      font-size: 1.25rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .counter-btn:hover {
+      background: #e2e8f0;
+      border-color: #cbd5e1;
+    }
+
+    .counter-btn:active {
+      transform: scale(0.92);
+      background: #cbd5e1;
+    }
+
+    .counter-btn.plus-btn {
+      background: var(--primary-surface);
+      border-color: rgba(27, 67, 50, 0.2);
+      color: var(--primary);
+    }
+
+    .counter-btn.plus-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .counter-input {
+      width: 48px;
+      height: 38px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      text-align: center;
+      font-family: var(--font-family);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: #fff;
+      -moz-appearance: textfield;
+    }
+
+    .counter-input::-webkit-outer-spin-button,
+    .counter-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .counter-input:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+    }
+
+    /* Sidebar / Summary Card */
+    .summary-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 24px;
+    }
+
+    .summary-header {
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .summary-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .summary-title svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--gold);
+    }
+
+    .reset-link {
+      background: none;
+      border: none;
+      color: #dc2626;
+      font-family: var(--font-family);
+      font-size: 0.84rem;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 4px 6px;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .reset-link:hover {
+      opacity: 1;
+    }
+
+    /* Head of household name input */
+    .input-field-group {
+      margin-bottom: 18px;
+    }
+
+    .input-field-group label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .text-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background: #fafafa;
+      transition: all 0.2s;
+    }
+
+    .text-input:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
+    }
+
+    /* Breakdown list */
+    .breakdown-list {
+      list-style: none;
+      margin-bottom: 20px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-left: 2px;
+    }
+
+    .breakdown-empty {
+      text-align: center;
+      padding: 24px 10px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      background: #fbfbfb;
+      border-radius: var(--radius-sm);
+      border: 1px dashed #e2e8f0;
+    }
+
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed #edf2f7;
+      font-size: 0.92rem;
+    }
+
+    .breakdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-label {
+      color: var(--text-main);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .item-subtext {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .item-total {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Grand Total Box */
+    .total-box {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(20, 53, 39, 0.2);
+    }
+
+    .total-label {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 4px;
+    }
+
+    .total-amount-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .total-amount {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .currency-text {
+      font-size: 1.1rem;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .members-count-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      color: #ffffff;
+    }
+
+    /* Action Buttons */
+    .actions-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-whatsapp {
+      background-color: #25D366;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #20bd5a;
+      transform: translateY(-1px);
+    }
+
+    .btn-whatsapp svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .btn-secondary {
+      background-color: #f1f5f9;
+      color: var(--text-main);
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e2e8f0;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 50%;
+      transform: translateX(50%) translateY(100px);
+      background: #1e293b;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1000;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateX(50%) translateY(0);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .prayer-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .family-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .counter-btn, .actions-group, .reset-link, .top-nav-bar {
+        display: none !important;
+      }
+      .summary-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+    }
+
+    /* Cloud & Auth Top Nav Bar */
+    .top-nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 6px 4px;
+    }
+
+    .cloud-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid #dce4de;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+
+    .status-dot.online {
+      background: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .status-dot.offline {
+      background: #94a3b8;
+    }
+
+    .status-dot.syncing {
+      background: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 0.5; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1.15); }
+    }
+
+    .auth-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-auth-login {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: var(--font-family);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(27, 67, 50, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .btn-auth-login:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-auth-login svg {
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
+    .user-chip {
+      background: #ffffff;
+      border: 1px solid #dce4de;
+      border-radius: 50px;
+      padding: 4px 6px 4px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .user-phone {
+      direction: ltr;
+      display: inline-block;
+      font-family: monospace, sans-serif;
+      font-size: 0.92rem;
+    }
+
+    .btn-logout {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: none;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-family: var(--font-family);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-logout:hover {
+      background: #fecaca;
+    }
+
+    /* Cloud Save Button in Sidebar */
+    .btn-cloud-save {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(27, 67, 50, 0.2);
+    }
+
+    .btn-cloud-save:hover {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      transform: translateY(-1px);
+    }
+
+    .btn-cloud-save:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .cloud-sync-info {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: -3px;
+      margin-bottom: 2px;
+      line-height: 1.35;
+    }
+
+    /* Modal Backdrop & Card */
+    .auth-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .auth-modal-backdrop.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .auth-modal-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 440px;
+      padding: 30px 24px 26px;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      transform: translateY(15px);
+      transition: transform 0.25s ease;
+      border: 1px solid #e2e8f0;
+    }
+
+    .auth-modal-backdrop.active .auth-modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    .modal-icon-badge {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--primary-surface);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .modal-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .auth-form-group {
+      text-align: right;
+      margin-bottom: 16px;
+    }
+
+    .auth-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .phone-input-wrapper {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #d1d5db;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .phone-input-wrapper:focus-within {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+    }
+
+    .phone-country-code {
+      padding: 10px 14px;
+      background: #f8fafc;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #334155;
+      border-left: 1px solid #e2e8f0;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .auth-input.phone-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 12px 14px;
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      font-family: monospace, sans-serif;
+      color: var(--text-main);
+      direction: ltr;
+      text-align: left;
+    }
+
+    .auth-input.otp-input {
+      width: 100%;
+      text-align: center;
+      letter-spacing: 8px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      padding: 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-sm);
+      background: #fff;
+      font-family: monospace, sans-serif;
+      color: var(--primary);
+      direction: ltr;
+    }
+
+    .auth-input.otp-input:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+    }
+
+    .auth-hint {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .auth-error-msg {
+      color: #dc2626;
+      font-size: 0.84rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      text-align: right;
+      min-height: 18px;
+    }
+
+    .btn-auth-action {
+      width: 100%;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-family);
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 14px rgba(27, 67, 50, 0.2);
+    }
+
+    .btn-auth-action:hover {
+      background: var(--primary-light);
+    }
+
+    .btn-auth-action:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .modal-secondary-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .btn-text-link {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-family: var(--font-family);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 2px 4px;
+    }
+
+    .btn-text-link:hover {
+      color: var(--primary-light);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Cloud & Auth Top Nav Bar -->
+    <div class="top-nav-bar">
+      <div class="cloud-status-pill" id="cloudStatusBadge">
+        <span class="status-dot offline" id="cloudStatusDot"></span>
+        <span id="cloudStatusText">حفظ محلي (سجّل للدخول السحابي)</span>
+      </div>
+      <div class="auth-actions" id="authActionsContainer">
+        <button type="button" class="btn-auth-login" id="openLoginModalBtn">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+          </svg>
+          <span>تسجيل الدخول بالجوال</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+        <span>عائلة الحميدان</span>
+      </div>
+      <h1>إجتماع أسرة عائلة الحميدان</h1>
+      
+      <!-- Event Details Card -->
+      <div class="event-card">
+        <!-- Date Row -->
+        <div class="event-date-row">
+          <div class="event-date-badge">
+            <svg viewBox="0 0 24 24">
+              <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+            </svg>
+            <span>يوم الخميس الموافق ١٤٤٨/٥/٤ هـ</span>
+          </div>
+          <span class="event-blessing-pill">بمشيئة الله</span>
+        </div>
+
+        <!-- Location Box (Red Circle Area) -->
+        <div class="event-location-box">
+          <div class="venue-info">
+            <div class="venue-icon-circle">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+              </svg>
+            </div>
+            <div class="venue-text-group">
+              <span class="venue-label">المكان</span>
+              <span class="venue-title">قاعة غناتي</span>
+            </div>
+          </div>
+
+          <a href="https://maps.app.goo.gl/ThDxkX43xCQwRuti7" target="_blank" rel="noopener" class="event-map-btn">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            <span>للوصول إلى الموقع</span>
+            <span class="map-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="greeting-card">
+        <p>« عزوتي.. السلام عليكم ورحمة الله وبركاته.. وأقول: إليكم مقدار الاشتراك الجديد بعد إلغاء الاجتماع الرابع »</p>
+        <span class="sub-note">يمكنكم تحديد عدد الأفراد لكل فئة لحساب الإجمالي بدقة وتجهيز التقرير للمشاركة.</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="calc-layout">
+      
+      <!-- Categories Panel -->
+      <main class="categories-panel" id="categoriesContainer">
+        <!-- Cards generated by JavaScript -->
+      </main>
+
+      <!-- Summary Sidebar -->
+      <aside class="summary-card">
+        <div class="summary-header">
+          <div class="summary-title">
+            <svg viewBox="0 0 24 24">
+              <path d="M19 3H5C3.89 3 3 3.89 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.89 20.1 3 19 3M19 19H5V5H19V19M17 17H7V15H17V17M17 13H7V11H17V13M17 9H7V7H17V9Z"/>
+            </svg>
+            ملخص الاشتراك
+          </div>
+          <button type="button" class="reset-link" id="resetBtn">إعادة تعيين</button>
+        </div>
+
+        <!-- Head of household input -->
+        <div class="input-field-group">
+          <label for="familyHeadName">اسم المشترك / رب الأسرة (اختياري):</label>
+          <input type="text" id="familyHeadName" class="text-input" placeholder="مثال: أبو محمد الحميدان" autocomplete="off">
+        </div>
+
+        <!-- Breakdown List -->
+        <div class="breakdown-list" id="breakdownList">
+          <div class="breakdown-empty">لم يتم إضافة أي أفراد بعد</div>
+        </div>
+
+        <!-- Total Display -->
+        <div class="total-box">
+          <div class="total-label">المبلغ الإجمالي المستحق</div>
+          <div class="total-amount-row">
+            <span class="total-amount" id="grandTotal">0</span>
+            <span class="currency-text">ريال</span>
+          </div>
+          <div class="members-count-badge" id="totalMembers">
+            إجمالي الأفراد: ٠
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions-group">
+          <button type="button" class="btn btn-cloud-save" id="cloudSaveBtn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+            </svg>
+            <span>حفظ وتأكيد الاشتراك في السحابة</span>
+          </button>
+          <div class="cloud-sync-info" id="cloudSyncInfo">
+            حفظ السجل في السحابة يتيح استرجاعه في أي وقت ومن أي جهاز
+          </div>
+
+          <button type="button" class="btn btn-whatsapp" id="whatsappBtn">
+            <svg viewBox="0 0 24 24">
+              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.06 7.42C8.89 7.42 8.62 7.49 8.38 7.75C8.15 8.01 7.49 8.63 7.49 9.88C7.49 11.14 8.41 12.35 8.54 12.52C8.67 12.69 10.33 15.26 12.87 16.35C15 17.26 15.44 17.08 15.9 17.04C16.36 17 17.39 16.43 17.6 15.83C17.82 15.23 17.82 14.72 17.75 14.61C17.68 14.5 17.5 14.44 17.24 14.31C16.98 14.18 15.7 13.55 15.46 13.46C15.23 13.37 15.06 13.33 14.89 13.59C14.72 13.84 14.23 14.44 14.08 14.61C13.93 14.78 13.78 14.8 13.52 14.67C13.26 14.54 12.43 14.27 11.45 13.39C10.68 12.7 10.17 11.85 10.02 11.59C9.87 11.33 10 11.19 10.14 11.06C10.25 10.95 10.39 10.77 10.52 10.62C10.65 10.47 10.69 10.36 10.78 10.19C10.87 10.02 10.82 9.87 10.76 9.74C10.69 9.61 10.2 8.41 10 7.92C9.79 7.43 9.58 7.5 9.42 7.49C9.27 7.48 9.06 7.42 9.06 7.42Z"/>
+            </svg>
+            إرسال التفاصيل عبر واتساب
+          </button>
+          
+          <button type="button" class="btn btn-secondary" id="copyBtn">
+            📋 نسخ التقرير كنص
+          </button>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p class="prayer-text">« أسعدكم الله في الدنيا والآخرة، وبارك في أرزاقكم وأعماركم وأعمالكم »</p>
+      <p class="family-note">اشتراكات اجتماع عائلة الحميدان • تم التحديث وفق التعديل الأخير</p>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toastMessage">تم نسخ تفاصيل الاشتراك بنجاح ✓</div>
+
+  <!-- Invisible Recaptcha Container for Firebase Phone Auth -->
+  <div id="recaptcha-container"></div>
+
+  <!-- Auth Modal (Phone & OTP) -->
+  <div class="auth-modal-backdrop" id="authModal" aria-hidden="true">
+    <div class="auth-modal-card">
+      <button type="button" class="modal-close-btn" id="closeAuthModalBtn" aria-label="إغلاق">&times;</button>
+      
+      <!-- Step 1: Phone Input -->
+      <div id="authStepPhone">
+        <div class="modal-icon-badge">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+          </svg>
+        </div>
+        <h3 class="modal-title">تسجيل الدخول السحابي</h3>
+        <p class="modal-desc">أدخل رقم جوالك لتصلك رسالة نصية برمز التحقق (OTP) لحفظ اشتراكك بسحابة العائلة والوصول إليه من أي جهاز.</p>
+
+        <div class="auth-form-group">
+          <label for="phoneNumberInput" class="auth-label">رقم الجوال:</label>
+          <div class="phone-input-wrapper">
+            <span class="phone-country-code">+966 🇸🇦</span>
+            <input type="tel" id="phoneNumberInput" class="auth-input phone-input" placeholder="05xxxxxxxx" dir="ltr" autocomplete="tel">
+          </div>
+          <span class="auth-hint">يمكنك إدخال الرقم بصيغة 05xxxxxxxx أو 5xxxxxxxx</span>
+        </div>
+
+        <div class="auth-error-msg" id="phoneErrorMsg"></div>
+
+        <button type="button" class="btn btn-auth-action" id="sendOtpBtn">
+          <span class="btn-spinner" id="phoneSpinner"></span>
+          <span class="btn-text" id="sendOtpBtnText">إرسال رمز التحقق (OTP)</span>
+        </button>
+      </div>
+
+      <!-- Step 2: OTP Verification -->
+      <div id="authStepOtp" style="display: none;">
+        <div class="modal-icon-badge">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+          </svg>
+        </div>
+        <h3 class="modal-title">تأكيد رمز التحقق (OTP)</h3>
+        <p class="modal-desc">تم إرسال كود التحقق في رسالة SMS إلى: <br><b id="displaySentPhone" dir="ltr" style="font-size: 1.05rem; color: var(--primary);"></b></p>
+
+        <div class="auth-form-group">
+          <label for="otpCodeInput" class="auth-label">رمز التحقق (6 أرقام):</label>
+          <input type="text" id="otpCodeInput" class="auth-input otp-input" placeholder="● ● ● ● ● ●" maxlength="6" inputmode="numeric" autocomplete="one-time-code" dir="ltr">
+        </div>
+
+        <div class="auth-error-msg" id="otpErrorMsg"></div>
+
+        <button type="button" class="btn btn-auth-action" id="verifyOtpBtn">
+          <span class="btn-spinner" id="otpSpinner"></span>
+          <span class="btn-text" id="verifyOtpBtnText">تأكيد الرمز والدخول</span>
+        </button>
+
+        <div class="modal-secondary-actions">
+          <button type="button" class="btn-text-link" id="resendOtpBtn">إعادة إرسال الرمز</button>
+          <span>•</span>
+          <button type="button" class="btn-text-link" id="backToPhoneBtn">تغيير رقم الجوال</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Firebase SDKs (Compat version for reliable browser/file support) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+  <script>
+    // ---------------------------------------------------------
+    // 1. Firebase Configuration & Initialization
+    // ---------------------------------------------------------
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtZL7hSyWXiAmXhrf8eijz-rZOtK9BBek",
+      authDomain: "alhumaidan-web.firebaseapp.com",
+      projectId: "alhumaidan-web",
+      databaseURL: "https://alhumaidan-web-default-rtdb.firebaseio.com",
+      storageBucket: "alhumaidan-web.firebasestorage.app",
+      messagingSenderId: "1073036599649",
+      appId: "1:1073036599649:web:064fd3f0e03a7b90d62520",
+      measurementId: "G-CFY8K9SH3Q"
+    };
+
+    let app = null;
+    let auth = null;
+    let rtdb = null;
+    let currentUser = null;
+    let confirmationResult = null;
+    let recaptchaVerifier = null;
+    let cloudSaveTimer = null;
+
+    try {
+      if (typeof firebase !== 'undefined') {
+        app = firebase.initializeApp(firebaseConfig);
+        auth = firebase.auth();
+        rtdb = firebase.database();
+        // Set language to Arabic for SMS verification messages
+        auth.languageCode = 'ar';
+      }
+    } catch (e) {
+      console.warn("Firebase initialization notice:", e);
+    }
+
+    // ---------------------------------------------------------
+    // 2. Data Definitions & State
+    // ---------------------------------------------------------
+    const categories = [
+      {
+        id: 'father',
+        title: 'الأب',
+        desc: 'اشتراك رب الأسرة',
+        price: 150
+      },
+      {
+        id: 'wives',
+        title: 'الزوجة \\ الزوجات',
+        desc: '150 ريال لكل زوجة',
+        price: 150
+      },
+      {
+        id: 'single_son_daughter',
+        title: 'الابن أو الابنة',
+        desc: 'غير الموظفين والطلاب',
+        price: 50
+      },
+      {
+        id: 'employed_single_son',
+        title: 'الابن الموظف (غير المتزوج)',
+        desc: 'الأبناء الموظفون العزاب',
+        price: 150
+      },
+      {
+        id: 'employed_married_son',
+        title: 'الابن الموظف (المتزوج)',
+        desc: 'الأبناء الموظفون المتزوجون',
+        price: 300
+      },
+      {
+        id: 'married_daughter_outside',
+        title: 'البنت المتزوجة من غير عائلة الحميدان',
+        desc: 'بنات العائلة المتزوجات من خارج الحميدان',
+        price: 150
+      },
+      {
+        id: 'cousins_heila',
+        title: 'ابن/ابنة البنت المتزوجة من غير الحميدان، وأبناء وبنات بنات العمة هيلة رحمها الله',
+        desc: 'الأحفاد من البنات خارج العائلة وذرية بنات العمة هيلة رحمها الله',
+        price: 50
+      }
+    ];
+
+    const state = {
+      name: '',
+      counts: {}
+    };
+
+    categories.forEach(cat => {
+      state.counts[cat.id] = 0;
+    });
+
+    const STORAGE_KEY = 'humaidan_calc_state_v4';
+
+    // ---------------------------------------------------------
+    // 3. Local Storage Helpers
+    // ---------------------------------------------------------
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.counts) {
+            Object.keys(parsed.counts).forEach(k => {
+              if (state.counts[k] !== undefined) {
+                state.counts[k] = parseInt(parsed.counts[k], 10) || 0;
+              }
+            });
+          }
+          if (typeof parsed.name === 'string') {
+            state.name = parsed.name;
+            document.getElementById('familyHeadName').value = parsed.name;
+          }
+        } else {
+          // Defaults
+          state.counts['father'] = 1;
+          state.counts['wives'] = 1;
+        }
+      } catch (e) {
+        console.error('Failed to load state', e);
+        state.counts['father'] = 1;
+        state.counts['wives'] = 1;
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    // ---------------------------------------------------------
+    // 4. Cloud Realtime Database Operations
+    // ---------------------------------------------------------
+    function updateCloudStatus(mode, text) {
+      const dot = document.getElementById('cloudStatusDot');
+      const textEl = document.getElementById('cloudStatusText');
+      if (!dot || !textEl) return;
+
+      dot.className = 'status-dot ' + mode;
+      textEl.textContent = text;
+    }
+
+    function loadUserDataFromCloud(uid) {
+      if (!rtdb || !uid) return;
+      updateCloudStatus('syncing', 'جاري استرجاع بياناتك من السحابة...');
+
+      const subRef = rtdb.ref('subscriptions/' + uid);
+      subRef.once('value').then(snapshot => {
+        const data = snapshot.val();
+        if (data) {
+          if (typeof data.name === 'string') {
+            state.name = data.name;
+            document.getElementById('familyHeadName').value = data.name;
+          }
+          if (data.counts) {
+            categories.forEach(cat => {
+              state.counts[cat.id] = parseInt(data.counts[cat.id], 10) || 0;
+            });
+          }
+          saveState();
+          renderCategories();
+          updateSummary();
+          showToast('تم استرجاع بياناتك المحفوظة من السحابة بنجاح ☁️');
+          updateCloudStatus('online', 'متصل بالسحابة • تمت المزامنة');
+        } else {
+          // No previous cloud data for this user, upload existing state
+          saveUserDataToCloud(false);
+          updateCloudStatus('online', 'متصل بالسحابة • جاهز');
+        }
+      }).catch(err => {
+        console.error('Error fetching cloud data:', err);
+        updateCloudStatus('online', 'متصل بالسحابة');
+      });
+    }
+
+    function saveUserDataToCloud(showNotification = true) {
+      if (!auth || !rtdb) {
+        if (showNotification) showToast('الفايربيس غير متوفر حالياً');
+        return Promise.resolve(false);
+      }
+
+      if (!currentUser) {
+        if (showNotification) {
+          openAuthModal();
+          showToast('يرجى تسجيل الدخول أولاً لحفظ البيانات في السحابة');
+        }
+        return Promise.resolve(false);
+      }
+
+      updateCloudStatus('syncing', 'جاري الحفظ في السحابة...');
+      const saveBtn = document.getElementById('cloudSaveBtn');
+      if (saveBtn) saveBtn.disabled = true;
+
+      let totalAmount = 0;
+      let totalPersons = 0;
+      categories.forEach(cat => {
+        const count = state.counts[cat.id] || 0;
+        totalAmount += count * cat.price;
+        totalPersons += count;
+      });
+
+      const payload = {
+        userId: currentUser.uid,
+        phoneNumber: currentUser.phoneNumber || '',
+        name: (state.name || '').trim(),
+        counts: state.counts,
+        totalAmount: totalAmount,
+        totalPersons: totalPersons,
+        lastUpdated: new Date().toISOString()
+      };
+
+      const subRef = rtdb.ref('subscriptions/' + currentUser.uid);
+      return subRef.set(payload).then(() => {
+        const timeStr = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+        updateCloudStatus('online', `تم الحفظ في السحابة (${timeStr}) ✓`);
+        if (showNotification) {
+          showToast('تم حفظ وتأكيد الاشتراك في السحابة بنجاح ✓ ☁️');
+        }
+        return true;
+      }).catch(err => {
+        console.error('Save to cloud failed:', err);
+        updateCloudStatus('online', 'تعذر الحفظ في السحابة');
+        if (showNotification) {
+          showToast('تعذر الحفظ في السحابة: ' + (err.message || ''));
+        }
+        return false;
+      }).finally(() => {
+        if (saveBtn) saveBtn.disabled = false;
+      });
+    }
+
+    function scheduleAutoCloudSave() {
+      if (!currentUser) return;
+      if (cloudSaveTimer) clearTimeout(cloudSaveTimer);
+      updateCloudStatus('syncing', 'جاري المزامنة مع السحابة...');
+      cloudSaveTimer = setTimeout(() => {
+        saveUserDataToCloud(false);
+      }, 1200);
+    }
+
+    // ---------------------------------------------------------
+    // 5. Phone Authentication & OTP Functions
+    // ---------------------------------------------------------
+    function normalizeArabicNumerals(str) {
+      if (!str) return '';
+      const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+      return String(str).replace(/[٠-٩]/g, (d) => arabicDigits.indexOf(d).toString());
+    }
+
+    function formatSaudiPhoneNumber(input) {
+      let cleaned = normalizeArabicNumerals(input).replace(/[^\d+]/g, '');
+      if (cleaned.startsWith('00966')) {
+        cleaned = '+966' + cleaned.substring(5);
+      } else if (cleaned.startsWith('966')) {
+        cleaned = '+966' + cleaned.substring(3);
+      } else if (cleaned.startsWith('05')) {
+        cleaned = '+966' + cleaned.substring(1);
+      } else if (cleaned.startsWith('5')) {
+        cleaned = '+966' + cleaned;
+      } else if (!cleaned.startsWith('+')) {
+        if (cleaned.length === 9 && cleaned.startsWith('5')) {
+          cleaned = '+966' + cleaned;
+        }
+      }
+      return cleaned;
+    }
+
+    function getArabicAuthErrorMessage(error) {
+      if (!error) return 'حدث خطأ غير متوقع';
+      const code = error.code || '';
+      switch (code) {
+        case 'auth/invalid-phone-number':
+          return 'رقم الجوال غير صحيح. تأكد من إدخال 9 أرقام بعد مفتاح الدولة (مثال: 0501234567).';
+        case 'auth/missing-phone-number':
+          return 'يرجى إدخال رقم الجوال.';
+        case 'auth/quota-exceeded':
+          return 'تم تجاوز حد الرسائل اليومي. يمكنك إضافة رقم تجريبي في Firebase Console للاختبار المجاني.';
+        case 'auth/too-many-requests':
+          return 'تم إيقاف الطلبات مؤقتاً لكثرة المحاولات. انتظر دقيقة ثم حاول ثانية.';
+        case 'auth/invalid-verification-code':
+          return 'رمز التحقق (OTP) غير صحيح، يرجى التأكد من الـ 6 أرقام وإعادة المحاولة.';
+        case 'auth/code-expired':
+          return 'انتهت صلاحية رمز التحقق، يرجى الضغط على "إعادة إرسال الرمز".';
+        case 'auth/network-request-failed':
+          return 'تعذر الاتصال بخوادم التحقق، تأكد من اتصالك بالإنترنت.';
+        case 'auth/app-not-authorized':
+          return 'هذا النطاق غير مصرح به في Firebase Console. شغّل الموقع عبر http://localhost:8000';
+        case 'auth/captcha-check-failed':
+          return 'فشل التحقق الأمني reCAPTCHA، أعد المحاولة.';
+        default:
+          return error.message || 'حدث خطأ أثناء المصادقة، يرجى المحاولة لاحقاً.';
+      }
+    }
+
+    function initRecaptchaVerifier() {
+      if (recaptchaVerifier) {
+        try {
+          recaptchaVerifier.clear();
+        } catch(e) {}
+        recaptchaVerifier = null;
+      }
+
+      recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible',
+        'callback': (response) => {
+          // reCAPTCHA solved
+        },
+        'expired-callback': () => {
+          document.getElementById('phoneErrorMsg').textContent = 'انتهت صلاحية التحقق، يرجى المحاولة مجدداً.';
+        }
+      });
+    }
+
+    function openAuthModal() {
+      const modal = document.getElementById('authModal');
+      document.getElementById('authStepPhone').style.display = 'block';
+      document.getElementById('authStepOtp').style.display = 'none';
+      document.getElementById('phoneErrorMsg').textContent = '';
+      document.getElementById('otpErrorMsg').textContent = '';
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      setTimeout(() => {
+        const input = document.getElementById('phoneNumberInput');
+        if (input) input.focus();
+      }, 100);
+    }
+
+    function closeAuthModal() {
+      const modal = document.getElementById('authModal');
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    async function handleSendOtp() {
+      const phoneInput = document.getElementById('phoneNumberInput');
+      const errorEl = document.getElementById('phoneErrorMsg');
+      const spinner = document.getElementById('phoneSpinner');
+      const btnText = document.getElementById('sendOtpBtnText');
+      const btn = document.getElementById('sendOtpBtn');
+
+      errorEl.textContent = '';
+      const raw = phoneInput.value.trim();
+      if (!raw) {
+        errorEl.textContent = 'يرجى إدخال رقم الجوال أولاً';
+        return;
+      }
+
+      const formatted = formatSaudiPhoneNumber(raw);
+      if (!formatted || formatted.length < 10) {
+        errorEl.textContent = 'رقم الجوال غير صحيح. اكتبه بصيغة 05xxxxxxxx';
+        return;
+      }
+
+      if (!auth) {
+        errorEl.textContent = 'خدمة التحقق غير مهيأة بعد.';
+        return;
+      }
+
+      btn.disabled = true;
+      spinner.style.display = 'inline-block';
+      btnText.textContent = 'جاري إرسال الرمز...';
+
+      try {
+        initRecaptchaVerifier();
+        confirmationResult = await auth.signInWithPhoneNumber(formatted, recaptchaVerifier);
+        
+        // Show OTP step
+        document.getElementById('displaySentPhone').textContent = formatted;
+        document.getElementById('authStepPhone').style.display = 'none';
+        document.getElementById('authStepOtp').style.display = 'block';
+        document.getElementById('otpCodeInput').value = '';
+        setTimeout(() => {
+          document.getElementById('otpCodeInput').focus();
+        }, 150);
+        showToast('تم إرسال رمز التحقق في رسالة نصية 📨');
+      } catch (err) {
+        console.error('Send OTP Error:', err);
+        errorEl.textContent = getArabicAuthErrorMessage(err);
+      } finally {
+        btn.disabled = false;
+        spinner.style.display = 'none';
+        btnText.textContent = 'إرسال رمز التحقق (OTP)';
+      }
+    }
+
+    async function handleVerifyOtp() {
+      const otpInput = document.getElementById('otpCodeInput');
+      const errorEl = document.getElementById('otpErrorMsg');
+      const spinner = document.getElementById('otpSpinner');
+      const btnText = document.getElementById('verifyOtpBtnText');
+      const btn = document.getElementById('verifyOtpBtn');
+
+      errorEl.textContent = '';
+      const otp = normalizeArabicNumerals(otpInput.value).replace(/\D/g, '');
+
+      if (!otp || otp.length !== 6) {
+        errorEl.textContent = 'يرجى إدخال الرمز المكون من 6 أرقام بالكامل';
+        return;
+      }
+
+      if (!confirmationResult) {
+        errorEl.textContent = 'انتهت صلاحية الجلسة، اضغط إعادة إرسال الرمز';
+        return;
+      }
+
+      btn.disabled = true;
+      spinner.style.display = 'inline-block';
+      btnText.textContent = 'جاري التحقق...';
+
+      try {
+        const result = await confirmationResult.confirm(otp);
+        currentUser = result.user;
+        closeAuthModal();
+        showToast('أهلاً بك! تم تسجيل الدخول بنجاح ✓');
+      } catch (err) {
+        console.error('Verify OTP Error:', err);
+        errorEl.textContent = getArabicAuthErrorMessage(err);
+      } finally {
+        btn.disabled = false;
+        spinner.style.display = 'none';
+        btnText.textContent = 'تأكيد الرمز والدخول';
+      }
+    }
+
+    function handleLogout() {
+      if (!auth) return;
+      if (confirm('هل تريد تسجيل الخروج؟')) {
+        auth.signOut().then(() => {
+          currentUser = null;
+          showToast('تم تسجيل الخروج بنجاح');
+        }).catch(err => {
+          console.error('Logout error:', err);
+        });
+      }
+    }
+
+    function updateAuthUI(user) {
+      const container = document.getElementById('authActionsContainer');
+      if (!container) return;
+
+      if (user) {
+        const displayPhone = user.phoneNumber || 'مستخدم مسجل';
+        container.innerHTML = `
+          <div class="user-chip">
+            <span class="user-phone">📱 ${displayPhone}</span>
+            <button type="button" class="btn-logout" id="logoutBtn" title="تسجيل الخروج">خروج</button>
+          </div>
+        `;
+        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+      } else {
+        container.innerHTML = `
+          <button type="button" class="btn-auth-login" id="openLoginModalBtn">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+            </svg>
+            <span>تسجيل الدخول بالجوال</span>
+          </button>
+        `;
+        document.getElementById('openLoginModalBtn').addEventListener('click', openAuthModal);
+      }
+    }
+
+    // Auth state observer
+    if (auth) {
+      auth.onAuthStateChanged(user => {
+        currentUser = user;
+        updateAuthUI(user);
+        if (user) {
+          updateCloudStatus('online', `متصل بالسحابة (${user.phoneNumber || 'مسجل'})`);
+          loadUserDataFromCloud(user.uid);
+        } else {
+          updateCloudStatus('offline', 'حفظ محلي (سجّل للدخول السحابي)');
+        }
+      });
+    }
+
+    // ---------------------------------------------------------
+    // 6. UI Rendering & Interactions
+    // ---------------------------------------------------------
+    function renderCategories() {
+      const container = document.getElementById('categoriesContainer');
+      container.innerHTML = '';
+
+      categories.forEach(cat => {
+        const count = state.counts[cat.id] || 0;
+        const card = document.createElement('div');
+        card.className = `category-card ${count > 0 ? 'has-value' : ''}`;
+        card.id = `card-${cat.id}`;
+
+        card.innerHTML = `
+          <div class="category-info">
+            <div class="category-title">
+              <span>${cat.title}</span>
+              <span class="rate-tag" id="tag-${cat.id}">${cat.price} ريال</span>
+            </div>
+            <div class="category-desc">${cat.desc}</div>
+          </div>
+          <div class="counter-group">
+            <button type="button" class="counter-btn" onclick="updateCount('${cat.id}', -1)" aria-label="تقليل">−</button>
+            <input type="number" 
+                   class="counter-input" 
+                   id="input-${cat.id}" 
+                   value="${count}" 
+                   min="0" 
+                   onchange="handleDirectInput('${cat.id}', this.value)"
+                   aria-label="العدد">
+            <button type="button" class="counter-btn plus-btn" onclick="updateCount('${cat.id}', 1)" aria-label="زيادة">+</button>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    window.updateCount = function(id, delta) {
+      const current = state.counts[id] || 0;
+      const next = Math.max(0, current + delta);
+      state.counts[id] = next;
+
+      const input = document.getElementById(`input-${id}`);
+      if (input) input.value = next;
+
+      const card = document.getElementById(`card-${id}`);
+      if (card) {
+        if (next > 0) card.classList.add('has-value');
+        else card.classList.remove('has-value');
+      }
+
+      saveState();
+      updateSummary();
+      scheduleAutoCloudSave();
+    };
+
+    window.handleDirectInput = function(id, value) {
+      let val = parseInt(value, 10);
+      if (isNaN(val) || val < 0) val = 0;
+      state.counts[id] = val;
+
+      const input = document.getElementById(`input-${id}`);
+      if (input) input.value = val;
+
+      const card = document.getElementById(`card-${id}`);
+      if (card) {
+        if (val > 0) card.classList.add('has-value');
+        else card.classList.remove('has-value');
+      }
+
+      saveState();
+      updateSummary();
+      scheduleAutoCloudSave();
+    };
+
+    function updateSummary() {
+      let totalAmount = 0;
+      let totalPersons = 0;
+      const breakdownItems = [];
+
+      categories.forEach(cat => {
+        const count = state.counts[cat.id] || 0;
+        if (count > 0) {
+          const itemSubtotal = count * cat.price;
+          totalAmount += itemSubtotal;
+          totalPersons += count;
+
+          breakdownItems.push({
+            title: cat.title,
+            subtext: `${count} × ${cat.price} ريال`,
+            subtotal: itemSubtotal
+          });
+        }
+      });
+
+      const grandTotalEl = document.getElementById('grandTotal');
+      const totalMembersEl = document.getElementById('totalMembers');
+      const breakdownListEl = document.getElementById('breakdownList');
+
+      grandTotalEl.textContent = totalAmount.toLocaleString('en-US');
+      totalMembersEl.textContent = `إجمالي المستفيدين: ${totalPersons} فرد`;
+
+      if (breakdownItems.length === 0) {
+        breakdownListEl.innerHTML = '<div class="breakdown-empty">لم يتم إضافة أي أفراد بعد</div>';
+      } else {
+        breakdownListEl.innerHTML = breakdownItems.map(item => `
+          <div class="breakdown-item">
+            <div>
+              <div class="item-label">${item.title}</div>
+              <div class="item-subtext">${item.subtext}</div>
+            </div>
+            <div class="item-total">${item.subtotal.toLocaleString('en-US')} ريال</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function generateReportText() {
+      let lines = [];
+      lines.push('🌴 *إجتماع أسرة عائلة الحميدان* 🌴');
+      lines.push('📅 يوم الخميس الموافق ١٤٤٨/٥/٤ هـ بمشيئة الله • في قاعة غناتي');
+      lines.push('📍 الموقع: https://maps.app.goo.gl/ThDxkX43xCQwRuti7');
+      lines.push('السلام عليكم ورحمة الله وبركاته');
+      lines.push('──────────────');
+      if (state.name.trim()) {
+        lines.push(`👤 *المشترك:* ${state.name.trim()}`);
+      }
+      if (currentUser && currentUser.phoneNumber) {
+        lines.push(`📱 *رقم الجوال:* ${currentUser.phoneNumber}`);
+        lines.push(`☁️ *الحالة:* موثق ومسجل بالسحابة ✓`);
+      }
+
+      let hasItems = false;
+      let grandTotal = 0;
+      let totalCount = 0;
+
+      categories.forEach(cat => {
+        const count = state.counts[cat.id] || 0;
+        if (count > 0) {
+          hasItems = true;
+          const sub = count * cat.price;
+          grandTotal += sub;
+          totalCount += count;
+          lines.push(`▫️ ${cat.title}: (${count}) = ${sub} ريال`);
+        }
+      });
+
+      if (!hasItems) return null;
+
+      lines.push('──────────────');
+      lines.push(`👥 *إجمالي الأفراد:* ${totalCount} فرد`);
+      lines.push(`💰 *المبلغ الإجمالي:* ${grandTotal} ريال`);
+      lines.push('──────────────');
+      lines.push('بارك الله في أرزاقكم وأعماركم وأعمالكم');
+
+      return lines.join('\n');
+    }
+
+    function showToast(msg = 'تم نسخ تفاصيل الاشتراك بنجاح ✓') {
+      const toast = document.getElementById('toastMessage');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2800);
+    }
+
+    // ---------------------------------------------------------
+    // 7. Event Listeners Initialization
+    // ---------------------------------------------------------
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      const text = generateReportText();
+      if (!text) {
+        alert('الرجاء اختيار الأفراد أولاً لحساب الاشتراك.');
+        return;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('تم نسخ التقرير بنجاح ✓');
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast('تم نسخ التقرير بنجاح ✓');
+      });
+    });
+
+    document.getElementById('whatsappBtn').addEventListener('click', () => {
+      const text = generateReportText();
+      if (!text) {
+        alert('الرجاء اختيار الأفراد أولاً لحساب الاشتراك.');
+        return;
+      }
+      const encoded = encodeURIComponent(text);
+      const url = `https://wa.me/?text=${encoded}`;
+      window.open(url, '_blank');
+    });
+
+    document.getElementById('cloudSaveBtn').addEventListener('click', () => {
+      saveUserDataToCloud(true);
+    });
+
+    document.getElementById('familyHeadName').addEventListener('input', (e) => {
+      state.name = e.target.value;
+      saveState();
+      scheduleAutoCloudSave();
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (confirm('هل تريد إعادة تعيين جميع الحقول؟')) {
+        categories.forEach(cat => {
+          state.counts[cat.id] = 0;
+        });
+        state.name = '';
+        document.getElementById('familyHeadName').value = '';
+        saveState();
+        renderCategories();
+        updateSummary();
+        if (currentUser) {
+          saveUserDataToCloud(false);
+        }
+        showToast('تمت إعادة التعيين');
+      }
+    });
+
+    // Auth Modal Handlers
+    document.getElementById('openLoginModalBtn')?.addEventListener('click', openAuthModal);
+    document.getElementById('closeAuthModalBtn').addEventListener('click', closeAuthModal);
+    document.getElementById('authModal').addEventListener('click', (e) => {
+      if (e.target.id === 'authModal') closeAuthModal();
+    });
+
+    document.getElementById('sendOtpBtn').addEventListener('click', handleSendOtp);
+    document.getElementById('phoneNumberInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleSendOtp();
+    });
+
+    document.getElementById('verifyOtpBtn').addEventListener('click', handleVerifyOtp);
+    document.getElementById('otpCodeInput').addEventListener('input', (e) => {
+      const val = normalizeArabicNumerals(e.target.value).replace(/\D/g, '');
+      if (val.length === 6) {
+        handleVerifyOtp();
+      }
+    });
+    document.getElementById('otpCodeInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleVerifyOtp();
+    });
+
+    document.getElementById('resendOtpBtn').addEventListener('click', handleSendOtp);
+    document.getElementById('backToPhoneBtn').addEventListener('click', () => {
+      document.getElementById('authStepOtp').style.display = 'none';
+      document.getElementById('authStepPhone').style.display = 'block';
+      document.getElementById('otpErrorMsg').textContent = '';
+      document.getElementById('phoneNumberInput').focus();
+    });
+
+    // Initialize application
+    loadState();
+    renderCategories();
+    updateSummary();
+  </script>
+</body>
+</html>

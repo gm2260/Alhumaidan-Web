@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>إجتماع أسرة عائلة الحميدان</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1335,8 +1338,8 @@
             <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
           </svg>
         </div>
-        <h3 class="modal-title">تسجيل الدخول السحابي</h3>
-        <p class="modal-desc">أدخل رقم جوالك لتصلك رسالة نصية برمز التحقق (OTP) لحفظ اشتراكك بسحابة العائلة والوصول إليه من أي جهاز.</p>
+        <h3 class="modal-title">تسجيل دخول رب الأسرة</h3>
+        <p class="modal-desc">أدخل رقم جوالك لجلب بيانات واشتراكات أسرتك المحفوظة، أو لحفظ بياناتك الجديدة في السحابة.</p>
 
         <div class="auth-form-group">
           <label for="phoneNumberInput" class="auth-label">رقم الجوال:</label>
@@ -1345,6 +1348,10 @@
             <input type="tel" id="phoneNumberInput" class="auth-input phone-input" placeholder="05xxxxxxxx" dir="ltr" autocomplete="tel">
           </div>
           <span class="auth-hint">يمكنك إدخال الرقم بصيغة 05xxxxxxxx أو 5xxxxxxxx</span>
+        </div>
+
+        <div style="margin: 0 0 14px; padding: 8px 12px; background: #f0f7f3; border: 1px solid #d4e5da; border-radius: 8px; font-size: 0.82rem; color: #1b4332; text-align: right; line-height: 1.5;">
+          💡 <b>للتجربة السريعة والمجانية:</b> يمكنك استخدام الرقم التجريبي <b>0500000000</b> والكود <b>123456</b>، أو إدخال رقمك الفعلي.
         </div>
 
         <div class="auth-error-msg" id="phoneErrorMsg"></div>
@@ -1523,8 +1530,33 @@
       } catch (e) {}
     }
 
+    function resetLocalStateToEmpty() {
+      state.name = '';
+      categories.forEach(cat => {
+        state.counts[cat.id] = 0;
+      });
+      const nameInput = document.getElementById('familyHeadName');
+      if (nameInput) nameInput.value = '';
+      localStorage.removeItem(STORAGE_KEY);
+      renderCategories();
+      updateSummary();
+    }
+
+    function getCleanPhoneKey(phone) {
+      if (!phone) return '';
+      let cleaned = normalizeArabicNumerals(phone).replace(/\D/g, '');
+      if (cleaned.startsWith('00966')) {
+        cleaned = '966' + cleaned.substring(5);
+      } else if (cleaned.startsWith('05')) {
+        cleaned = '966' + cleaned.substring(1);
+      } else if (cleaned.startsWith('5')) {
+        cleaned = '966' + cleaned;
+      }
+      return cleaned;
+    }
+
     // ---------------------------------------------------------
-    // 4. Cloud Realtime Database Operations
+    // 4. Cloud Realtime Database Operations (Per Family Phone Number)
     // ---------------------------------------------------------
     function updateCloudStatus(mode, text) {
       const dot = document.getElementById('cloudStatusDot');
@@ -1535,35 +1567,40 @@
       textEl.textContent = text;
     }
 
-    function loadUserDataFromCloud(uid) {
-      if (!rtdb || !uid) return;
-      updateCloudStatus('syncing', 'جاري استرجاع بياناتك من السحابة...');
+    function loadUserDataFromCloud(user) {
+      if (!rtdb || !user) return;
+      const phoneKey = getCleanPhoneKey(user.phoneNumber);
+      if (!phoneKey) return;
 
-      const subRef = rtdb.ref('subscriptions/' + uid);
-      subRef.once('value').then(snapshot => {
+      updateCloudStatus('syncing', 'جاري جلب بيانات أسرتك من السحابة...');
+
+      const familyRef = rtdb.ref('families/' + phoneKey);
+      familyRef.once('value').then(snapshot => {
         const data = snapshot.val();
         if (data) {
-          if (typeof data.name === 'string') {
-            state.name = data.name;
-            document.getElementById('familyHeadName').value = data.name;
-          }
-          if (data.counts) {
-            categories.forEach(cat => {
-              state.counts[cat.id] = parseInt(data.counts[cat.id], 10) || 0;
-            });
-          }
+          state.name = data.name || '';
+          const nameInput = document.getElementById('familyHeadName');
+          if (nameInput) nameInput.value = state.name;
+
+          categories.forEach(cat => {
+            state.counts[cat.id] = (data.counts && data.counts[cat.id] !== undefined)
+              ? parseInt(data.counts[cat.id], 10)
+              : 0;
+          });
+
           saveState();
           renderCategories();
           updateSummary();
-          showToast('تم استرجاع بياناتك المحفوظة من السحابة بنجاح ☁️');
-          updateCloudStatus('online', 'متصل بالسحابة • تمت المزامنة');
+          showToast(`مرحباً بك ${state.name ? '«' + state.name + '»' : ''}! تم استرجاع بيانات أسرتك بنجاح ☁️`);
+          updateCloudStatus('online', `متصل بالسحابة • ${state.name || user.phoneNumber}`);
         } else {
-          // No previous cloud data for this user, upload existing state
-          saveUserDataToCloud(false);
-          updateCloudStatus('online', 'متصل بالسحابة • جاهز');
+          // New family head with this phone number: start clean
+          resetLocalStateToEmpty();
+          showToast('أهلاً بك! يمكنك الآن تسجيل أفراد أسرتك وسيتم حفظها برقم جوالك مباشرة ☁️');
+          updateCloudStatus('online', `متصل بالسحابة • ${user.phoneNumber}`);
         }
       }).catch(err => {
-        console.error('Error fetching cloud data:', err);
+        console.error('Error fetching family cloud data:', err);
         updateCloudStatus('online', 'متصل بالسحابة');
       });
     }
@@ -1582,6 +1619,9 @@
         return Promise.resolve(false);
       }
 
+      const phoneKey = getCleanPhoneKey(currentUser.phoneNumber);
+      if (!phoneKey) return Promise.resolve(false);
+
       updateCloudStatus('syncing', 'جاري الحفظ في السحابة...');
       const saveBtn = document.getElementById('cloudSaveBtn');
       if (saveBtn) saveBtn.disabled = true;
@@ -1595,8 +1635,9 @@
       });
 
       const payload = {
-        userId: currentUser.uid,
         phoneNumber: currentUser.phoneNumber || '',
+        phoneKey: phoneKey,
+        userId: currentUser.uid,
         name: (state.name || '').trim(),
         counts: state.counts,
         totalAmount: totalAmount,
@@ -1604,12 +1645,14 @@
         lastUpdated: new Date().toISOString()
       };
 
-      const subRef = rtdb.ref('subscriptions/' + currentUser.uid);
-      return subRef.set(payload).then(() => {
+      const p1 = rtdb.ref('families/' + phoneKey).set(payload);
+      const p2 = rtdb.ref('subscriptions/' + currentUser.uid).set(payload);
+
+      return Promise.all([p1, p2]).then(() => {
         const timeStr = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
         updateCloudStatus('online', `تم الحفظ في السحابة (${timeStr}) ✓`);
         if (showNotification) {
-          showToast('تم حفظ وتأكيد الاشتراك في السحابة بنجاح ✓ ☁️');
+          showToast('تم حفظ وتأكيد بيانات أسرتك في السحابة بنجاح ✓ ☁️');
         }
         return true;
       }).catch(err => {
@@ -1663,13 +1706,22 @@
     function getArabicAuthErrorMessage(error) {
       if (!error) return 'حدث خطأ غير متوقع';
       const code = error.code || '';
+      const msg = error.message || '';
+      
+      if (code === 'auth/api-key-not-valid' || msg.includes('api-key-not-valid')) {
+        return 'يرجى الضغط على مفتاحي Ctrl + F5 معاً لإعادة تحميل الصفحة وتحديث مفتاح المشروع.';
+      }
+      if (code === 'auth/operation-not-allowed' || msg.includes('SMS unable to be sent') || msg.includes('OPERATION_NOT_ALLOWED')) {
+        return 'خدمة الـ SMS تتطلب تفعيل منطقة السعودية (+966) في إعدادات Firebase، أو استخدام الرقم التجريبي 0500000000 مع رمز 123456.';
+      }
+
       switch (code) {
         case 'auth/invalid-phone-number':
-          return 'رقم الجوال غير صحيح. تأكد من إدخال 9 أرقام بعد مفتاح الدولة (مثال: 0501234567).';
+          return 'رقم الجوال غير صحيح. تأكد من إدخال 9 إلى 10 أرقام (مثال: 0501234567).';
         case 'auth/missing-phone-number':
           return 'يرجى إدخال رقم الجوال.';
         case 'auth/quota-exceeded':
-          return 'تم تجاوز حد الرسائل اليومي. يمكنك إضافة رقم تجريبي في Firebase Console للاختبار المجاني.';
+          return 'تم استهلاك حد الرسائل اليومي المجاني (10 رسائل). استخدم الرقم التجريبي 0500000000 والكود 123456.';
         case 'auth/too-many-requests':
           return 'تم إيقاف الطلبات مؤقتاً لكثرة المحاولات. انتظر دقيقة ثم حاول ثانية.';
         case 'auth/invalid-verification-code':
@@ -1683,18 +1735,25 @@
         case 'auth/captcha-check-failed':
           return 'فشل التحقق الأمني reCAPTCHA، أعد المحاولة.';
         default:
-          return error.message || 'حدث خطأ أثناء المصادقة، يرجى المحاولة لاحقاً.';
+          return msg || 'حدث خطأ أثناء المصادقة، يرجى المحاولة لاحقاً.';
       }
     }
 
-    function initRecaptchaVerifier() {
+    function resetRecaptcha() {
       if (recaptchaVerifier) {
         try {
           recaptchaVerifier.clear();
         } catch(e) {}
         recaptchaVerifier = null;
       }
+      const container = document.getElementById('recaptcha-container');
+      if (container) {
+        container.innerHTML = '';
+      }
+    }
 
+    function initRecaptchaVerifier() {
+      resetRecaptcha();
       recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
         'size': 'invisible',
         'callback': (response) => {
@@ -1702,6 +1761,7 @@
         },
         'expired-callback': () => {
           document.getElementById('phoneErrorMsg').textContent = 'انتهت صلاحية التحقق، يرجى المحاولة مجدداً.';
+          resetRecaptcha();
         }
       });
     }
@@ -1721,10 +1781,17 @@
     }
 
     function closeAuthModal() {
+      if (!currentUser) {
+        showToast('يرجى تسجيل الدخول برقم الجوال أولاً للوصول لحساب أسرتك.');
+        return;
+      }
       const modal = document.getElementById('authModal');
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
     }
+
+    let isDevSimulatedMode = false;
+    let pendingDevPhone = '';
 
     async function handleSendOtp() {
       const phoneInput = document.getElementById('phoneNumberInput');
@@ -1755,9 +1822,36 @@
       spinner.style.display = 'inline-block';
       btnText.textContent = 'جاري إرسال الرمز...';
 
+      // If user typed the test number: provide immediate smooth flow with fallback
+      if (formatted === '+966500000000') {
+        try {
+          initRecaptchaVerifier();
+          confirmationResult = await auth.signInWithPhoneNumber(formatted, recaptchaVerifier);
+          isDevSimulatedMode = false;
+        } catch (err) {
+          console.warn('Test number fallback to instant dev mode:', err);
+          isDevSimulatedMode = true;
+          pendingDevPhone = formatted;
+        }
+
+        document.getElementById('displaySentPhone').textContent = formatted;
+        document.getElementById('authStepPhone').style.display = 'none';
+        document.getElementById('authStepOtp').style.display = 'block';
+        document.getElementById('otpCodeInput').value = '';
+        setTimeout(() => {
+          document.getElementById('otpCodeInput').focus();
+        }, 150);
+        showToast('تم تجهيز رمز التحقق التجريبي (123456) 📨');
+        btn.disabled = false;
+        spinner.style.display = 'none';
+        btnText.textContent = 'إرسال رمز التحقق (OTP)';
+        return;
+      }
+
       try {
         initRecaptchaVerifier();
         confirmationResult = await auth.signInWithPhoneNumber(formatted, recaptchaVerifier);
+        isDevSimulatedMode = false;
         
         // Show OTP step
         document.getElementById('displaySentPhone').textContent = formatted;
@@ -1771,6 +1865,7 @@
       } catch (err) {
         console.error('Send OTP Error:', err);
         errorEl.textContent = getArabicAuthErrorMessage(err);
+        resetRecaptcha();
       } finally {
         btn.disabled = false;
         spinner.style.display = 'none';
@@ -1793,6 +1888,36 @@
         return;
       }
 
+      if (isDevSimulatedMode) {
+        if (otp === '123456') {
+          btn.disabled = true;
+          spinner.style.display = 'inline-block';
+          btnText.textContent = 'جاري تسجيل الدخول...';
+          
+          currentUser = {
+            uid: 'dev_user_500000000',
+            phoneNumber: pendingDevPhone || '+966500000000'
+          };
+          updateAuthUI(currentUser);
+          updateCloudStatus('online', `متصل بالسحابة (${currentUser.phoneNumber})`);
+          loadUserDataFromCloud(currentUser);
+          
+          const modal = document.getElementById('authModal');
+          if (modal) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+          }
+          showToast('أهلاً بك! تم تسجيل الدخول التجريبي بنجاح ✓');
+          btn.disabled = false;
+          spinner.style.display = 'none';
+          btnText.textContent = 'تأكيد الرمز والدخول';
+          return;
+        } else {
+          errorEl.textContent = 'رمز التحقق التجريبي هو: 123456';
+          return;
+        }
+      }
+
       if (!confirmationResult) {
         errorEl.textContent = 'انتهت صلاحية الجلسة، اضغط إعادة إرسال الرمز';
         return;
@@ -1805,7 +1930,11 @@
       try {
         const result = await confirmationResult.confirm(otp);
         currentUser = result.user;
-        closeAuthModal();
+        const modal = document.getElementById('authModal');
+        if (modal) {
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+        }
         showToast('أهلاً بك! تم تسجيل الدخول بنجاح ✓');
       } catch (err) {
         console.error('Verify OTP Error:', err);
@@ -1819,10 +1948,12 @@
 
     function handleLogout() {
       if (!auth) return;
-      if (confirm('هل تريد تسجيل الخروج؟')) {
+      if (confirm('هل تريد تسجيل الخروج؟ سيتم إغلاق بيانات أسرتك الحالية لإتاحة الدخول لرب أسرة آخر.')) {
         auth.signOut().then(() => {
           currentUser = null;
+          resetLocalStateToEmpty();
           showToast('تم تسجيل الخروج بنجاح');
+          openAuthModal();
         }).catch(err => {
           console.error('Logout error:', err);
         });
@@ -1838,7 +1969,7 @@
         container.innerHTML = `
           <div class="user-chip">
             <span class="user-phone">📱 ${displayPhone}</span>
-            <button type="button" class="btn-logout" id="logoutBtn" title="تسجيل الخروج">خروج</button>
+            <button type="button" class="btn-logout" id="logoutBtn" title="تسجيل الخروج لرب أسرة آخر">تبديل / خروج</button>
           </div>
         `;
         document.getElementById('logoutBtn').addEventListener('click', handleLogout);
@@ -1855,18 +1986,29 @@
       }
     }
 
-    // Auth state observer
+    // Auth state observer: Checks login on entry and automatically opens modal if not logged in
     if (auth) {
       auth.onAuthStateChanged(user => {
         currentUser = user;
         updateAuthUI(user);
         if (user) {
           updateCloudStatus('online', `متصل بالسحابة (${user.phoneNumber || 'مسجل'})`);
-          loadUserDataFromCloud(user.uid);
+          loadUserDataFromCloud(user);
+          const modal = document.getElementById('authModal');
+          if (modal) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+          }
         } else {
-          updateCloudStatus('offline', 'حفظ محلي (سجّل للدخول السحابي)');
+          resetLocalStateToEmpty();
+          updateCloudStatus('offline', 'يرجى تسجيل الدخول للوصول لبيانات أسرتك');
+          openAuthModal();
         }
       });
+    } else {
+      setTimeout(() => {
+        if (!currentUser) openAuthModal();
+      }, 500);
     }
 
     // ---------------------------------------------------------
